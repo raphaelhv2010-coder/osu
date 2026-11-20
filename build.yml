@@ -1,0 +1,16 @@
+name: Build NumWorks NWA
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARM GCC
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi
+      - name: Compile .nwa
+        run: make
+      - name: Upload .nwa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: osu_mania_4k.nwa
+          path: osu_mania_4k.nwa
